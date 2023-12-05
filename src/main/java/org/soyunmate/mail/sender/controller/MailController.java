@@ -41,8 +41,8 @@ public class MailController {
     public ResponseEntity<?> receiveRequestEmailWithFile(@ModelAttribute EmailFileDTO emailFileDTO) {
 
         try {
-            String fileName = emailFileDTO.getFile().getName();
-            Path path = Paths.get("src/main/resources/files");
+            String fileName = emailFileDTO.getFile().getOriginalFilename();
+            Path path = Paths.get("src/main/resources/files", fileName);
             Files.createDirectories(path.getParent());
             Files.copy(emailFileDTO.getFile().getInputStream(),path, StandardCopyOption.REPLACE_EXISTING);
 
